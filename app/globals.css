@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #000000;
+  --gold: #d4af37;
+}
+
+html {
+  background: #000000;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a #000000;
+}
+
+body {
+  background: #000000;
+  color: #fff;
+  font-family: Inter, "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* overflow-x: clip (NOT hidden) — hidden forces overflow-y: visible → auto,
+     which turns body into a scroll container and breaks position: sticky
+     descendants (the scroll canvas). clip prevents x-overflow without
+     creating a scroll container. */
+  overflow-x: clip;
+}
+
+/* ——— Minimal dark scrollbar with subtle gold hover ——— */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a #000000;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.28);
+  color: #fff;
+}
+
+/* Canvas pixel smoothing */
+canvas {
+  image-rendering: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Luxury eyebrow label */
+.eyebrow {
+  letter-spacing: 0.35em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Soft gold glow for CTA */
+.gold-glow {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35),
+    0 8px 40px -8px rgba(212, 175, 55, 0.45);
+}
+.gold-glow:hover {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.7),
+    0 12px 60px -8px rgba(212, 175, 55, 0.65);
+}
+
+/* Film grain — ultra subtle */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Loading shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 1.2s linear infinite;
+}
+
+@keyframes float-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.4;
+  }
+}
+.animate-float-hint {
+  animation: float-hint 2.2s ease-in-out infinite;
+}
